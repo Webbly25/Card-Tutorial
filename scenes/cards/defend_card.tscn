@@ -5,11 +5,10 @@
 
 [node name="DefendCard" type="Node2D"]
 
-[node name="Card" parent="." node_paths=PackedStringArray("card_image") instance=ExtResource("1_b6e2y")]
+[node name="Card" parent="." instance=ExtResource("1_b6e2y")]
 card_name = "Defend"
 card_mana_cost = 1
 card_description = "Defend 1"
-card_image = NodePath("../CardImage")
 
 [node name="CardImage" type="Sprite2D" parent="."]
 position = Vector2(0, -15)
