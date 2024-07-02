@@ -11,10 +11,19 @@ var maxmimum_spread_angle: float = 2.5
 @onready var collision_shape: CollisionShape2D = $DebugShape
 
 var hand: Array = []
+var touched_idxs: Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
+
+func _input(event):
+	if (event.is_action_pressed("mouse_click")):
+		if (touched_idxs.size() > 0):
+			var max_idx = calc_highlight_idx()
+			var card = remove_card(max_idx)
+			touched_idxs.erase(max_idx)
+			card.queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta) -> void:
@@ -23,9 +32,14 @@ func _process(_delta) -> void:
 	if (collision_shape.shape as CircleShape2D).radius != hand_radius:
 		(collision_shape.shape as CircleShape2D).radius = hand_radius
 
+	if (touched_idxs.size() > 0):
+		hand[calc_highlight_idx()].highlight()
+
 func add_card(card: Node2D) -> void:
 	hand.push_back(card)
 	add_child(card)
+	card.mouse_entered.connect(_handle_card_touched)
+	card.mouse_exited.connect(_handle_card_untouched)
 	reposition_cards()
 
 func remove_card(card_idx: int) -> Node2D:
@@ -39,14 +53,35 @@ func reposition_cards() -> void:
 	var current_angle = -(card_spread * (hand.size() - 1)) / 2 - 90
 
 	for card in hand:
-		_update_card_transform(card, current_angle)
+		card.position = get_card_position(current_angle)
+		card.rotation_degrees = current_angle + 90
 		current_angle += card_spread
-
-func _update_card_transform(card: Node2D, angle_deg: float) -> void:
-	card.position = get_card_position(angle_deg)
-	card.rotation_degrees = angle_deg + 90
 
 func get_card_position(angle_deg: float) -> Vector2:
 	var x: float = hand_radius * cos(deg_to_rad(angle_deg))
 	var y: float = hand_radius * sin(deg_to_rad(angle_deg))
 	return Vector2(x, y)
+
+func _handle_card_touched(card: Node2D) -> void:
+	var card_idx = hand.find(card)
+
+	# unhighlight all cards
+	for idx in touched_idxs:
+		hand[idx].unhighlight()
+
+	# add the card to the touched_idxs array
+	touched_idxs.push_back(card_idx)
+
+func _handle_card_untouched(card: Node2D) -> void:
+	var card_idx = hand.find(card)
+	hand[card_idx].unhighlight()
+	
+	# remove the card from the touched_idxs array
+	touched_idxs.erase(card_idx)
+
+func calc_highlight_idx() -> int:
+	var max_idx = -1
+	for idx in touched_idxs:
+		if (idx > max_idx):
+			max_idx = idx
+	return max_idx

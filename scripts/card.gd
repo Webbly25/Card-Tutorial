@@ -3,6 +3,9 @@
 class_name Card
 extends Node2D
 
+signal mouse_entered(card: Card)
+signal mouse_exited(card: Card)
+
 @export var card_name: String
 @export var card_mana_cost: int
 @export var card_description: String
@@ -41,9 +44,7 @@ func unhighlight() -> void:
 	$BaseCardSprite.modulate = Color(1, 1, 1, 1)
 
 func _on_area_2d_mouse_entered() -> void:
-	highlight()
-	pass # Replace with function body.
+	mouse_entered.emit(self)
 
 func _on_area_2d_mouse_exited() -> void:
-	unhighlight()
-	pass # Replace with function body.
+	mouse_exited.emit(self)
