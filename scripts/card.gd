@@ -12,19 +12,19 @@ extends Node2D
 @onready var description_lbl: Label = $CardDescriptionLabel
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	_update_graphics()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process(_delta) -> void:
 	_update_graphics()
 
-func set_values(_name: String, _mana_cost: int, _description: String):
+func set_values(_name: String, _mana_cost: int, _description: String) -> void:
 	card_name = _name
 	card_mana_cost = _mana_cost
 	card_description = _description
 
-func _update_graphics():
+func _update_graphics() -> void:
 	if (name_lbl.get_text() != card_name):
 		name_lbl.set_text(card_name)
 
