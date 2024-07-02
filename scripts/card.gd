@@ -33,3 +33,17 @@ func _update_graphics() -> void:
 
 	if (description_lbl.get_text() != card_description):
 		description_lbl.set_text(card_description)
+
+func highlight() -> void:
+	$BaseCardSprite.modulate = Color(1, 0.5, 0.1, 1)
+
+func unhighlight() -> void:
+	$BaseCardSprite.modulate = Color(1, 1, 1, 1)
+
+func _on_area_2d_mouse_entered() -> void:
+	highlight()
+	pass # Replace with function body.
+
+func _on_area_2d_mouse_exited() -> void:
+	unhighlight()
+	pass # Replace with function body.
