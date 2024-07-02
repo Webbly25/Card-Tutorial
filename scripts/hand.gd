@@ -3,10 +3,9 @@
 class_name Hand
 extends Node2D
 
-@export var hand_radius: int = 1000
-# @export var card_angle: float = 0
-@export var angle_limit: float = 20
-@export var maxmimum_spread_angle: float = 5
+var hand_radius: int = 1000
+var angle_limit: float = 20
+var maxmimum_spread_angle: float = 2.5
 
 @onready var test_card = $TestCard
 @onready var collision_shape: CollisionShape2D = $DebugShape
@@ -28,6 +27,12 @@ func add_card(card: Node2D) -> void:
 	hand.push_back(card)
 	add_child(card)
 	reposition_cards()
+
+func remove_card(card_idx: int) -> Node2D:
+	var card = hand.pop_at(card_idx)
+	remove_child(card)
+	reposition_cards()
+	return card
 
 func reposition_cards() -> void:
 	var card_spread = min(angle_limit / hand.size(), maxmimum_spread_angle)
