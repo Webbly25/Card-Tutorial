@@ -9,4 +9,5 @@ func _process(_delta: float) -> void:
 	pass
 
 func _on_deck_card_activated(card: Card) -> void:
-	card.activate()
+	var payload = ActionPayload.new($GameScreen/Player, [$GameScreen/Enemy])
+	card.activate(payload)

@@ -15,7 +15,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
-func activate() -> void:
+func activate(_payload: ActionPayload) -> void:
 	pass # implement per card
 
 func highlight() -> void:
