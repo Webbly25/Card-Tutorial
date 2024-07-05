@@ -9,10 +9,12 @@ signal mouse_exited(card: Card)
 @export var card_name: String
 @export var card_mana_cost: int
 @export var card_description: String
+@export var card_texture: Texture2D
 
 @onready var name_lbl: Label = $Name/NameLabel
 @onready var mana_lbl: Label = $Mana/ManaLabel
 @onready var description_lbl: Label = $CardDescriptionLabel
+@onready var card_sprite: Sprite2D = $CardSprite
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,6 +38,9 @@ func _update_graphics() -> void:
 
 	if (description_lbl.get_text() != card_description):
 		description_lbl.set_text(card_description)
+	
+	if (card_sprite.texture != card_texture):
+		card_sprite.texture = card_texture
 
 func highlight() -> void:
 	$BaseCardSprite.modulate = Color(1, 0.5, 0.1, 1)
