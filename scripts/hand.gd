@@ -25,8 +25,7 @@ func _input(event):
 			var max_idx = calc_highlight_idx()
 			var card = remove_card(max_idx)
 			touched_idxs.erase(max_idx)
-			# TODO: remove this since card will passed to a different script
-			card.queue_free()
+			card_activated.emit(card)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta) -> void:

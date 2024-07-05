@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dldr1n8cvtwtv"]
+
+[ext_resource type="Script" path="res://scripts/character.gd" id="1_3urg2"]
+
+[node name="Player" type="Node2D"]
+position = Vector2(-1, 0)
+script = ExtResource("1_3urg2")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -26.0
+offset_top = -36.0
+offset_right = 24.0
+offset_bottom = -31.0
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
