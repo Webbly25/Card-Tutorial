@@ -1,22 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://6n45yljx74dl"]
+[gd_scene load_steps=4 format=3 uid="uid://b2ecffsangg74"]
 
-[ext_resource type="PackedScene" uid="uid://c7g61ykx1uu1y" path="res://scenes/cards/card.tscn" id="1_fqeil"]
+[ext_resource type="Script" path="res://scripts/cards/attack_card.gd" id="1_j1d6g"]
+[ext_resource type="PackedScene" uid="uid://c7g61ykx1uu1y" path="res://scenes/cards/_base_card.tscn" id="1_vwk56"]
 [ext_resource type="Texture2D" uid="uid://ctljr3vkdpoiw" path="res://assets/sprites/attack_card_image.png" id="2_dp6w1"]
 
-[node name="AttackCard" instance=ExtResource("1_fqeil")]
+[node name="AttackCard" type="Node2D"]
+script = ExtResource("1_j1d6g")
+
+[node name="BaseCard" parent="." instance=ExtResource("1_vwk56")]
 card_name = "Attack"
 card_mana_cost = 1
 card_description = "Attack 1"
 card_texture = ExtResource("2_dp6w1")
-
-[node name="CardSprite" parent="." index="1"]
-texture = ExtResource("2_dp6w1")
-
-[node name="ManaLabel" parent="Mana" index="1"]
-text = "1"
-
-[node name="NameLabel" parent="Name" index="0"]
-text = "Attack"
-
-[node name="CardDescriptionLabel" parent="." index="4"]
-text = "Attack 1"

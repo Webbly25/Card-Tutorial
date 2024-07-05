@@ -5,7 +5,7 @@ signal card_activated(card: Card)
 @onready var AttackCardScene: PackedScene = preload ("res://scenes/cards/attack_card.tscn")
 @onready var DefendCardScene: PackedScene = preload ("res://scenes/cards/defend_card.tscn")
 
-@onready var hand: Hand = $CanvasLayer/Hand
+@onready var hand: Hand = $Hand
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

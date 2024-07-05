@@ -1,32 +1,32 @@
 [gd_scene load_steps=9 format=3 uid="uid://c7g61ykx1uu1y"]
 
-[ext_resource type="Script" path="res://scripts/cards/card.gd" id="1_tk3pd"]
-[ext_resource type="Texture2D" uid="uid://du3qut1q4hgl2" path="res://assets/sprites/card_base.png" id="1_yqod3"]
-[ext_resource type="Texture2D" uid="uid://c382q2gthd5y" path="res://assets/sprites/mana_slot.png" id="2_aovqc"]
-[ext_resource type="FontFile" uid="uid://3dxeqlsm06pa" path="res://assets/fonts/MemoryPro.ttf" id="3_jo2eh"]
+[ext_resource type="Script" path="res://scripts/cards/_base_card.gd" id="1_4conb"]
+[ext_resource type="Texture2D" uid="uid://du3qut1q4hgl2" path="res://assets/sprites/card_base.png" id="2_e3lby"]
+[ext_resource type="Texture2D" uid="uid://c382q2gthd5y" path="res://assets/sprites/mana_slot.png" id="3_0u1lr"]
+[ext_resource type="FontFile" uid="uid://3dxeqlsm06pa" path="res://assets/fonts/MemoryPro.ttf" id="4_e1y2v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4j566"]
-font = ExtResource("3_jo2eh")
+font = ExtResource("4_e1y2v")
 
 [sub_resource type="LabelSettings" id="LabelSettings_irx7i"]
-font = ExtResource("3_jo2eh")
+font = ExtResource("4_e1y2v")
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_psfhq"]
-font = ExtResource("3_jo2eh")
+font = ExtResource("4_e1y2v")
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f8giw"]
 size = Vector2(78, 124)
 
-[node name="Card" type="Node2D"]
-script = ExtResource("1_tk3pd")
+[node name="BaseCard" type="Node2D"]
+script = ExtResource("1_4conb")
 card_name = "NAME"
 card_description = "DESC"
 
 [node name="BaseCardSprite" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_yqod3")
+texture = ExtResource("2_e3lby")
 
 [node name="CardSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -15)
@@ -35,7 +35,7 @@ position = Vector2(0, -15)
 position = Vector2(34, -58)
 
 [node name="ManaSprite" type="Sprite2D" parent="Mana"]
-texture = ExtResource("2_aovqc")
+texture = ExtResource("3_0u1lr")
 
 [node name="ManaLabel" type="Label" parent="Mana"]
 offset_left = -20.0
