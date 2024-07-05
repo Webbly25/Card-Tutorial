@@ -3,6 +3,8 @@
 class_name Hand
 extends Node2D
 
+signal card_activated(card: Card)
+
 var hand_radius: int = 1000
 var angle_limit: float = 20
 var maxmimum_spread_angle: float = 2.5
@@ -15,7 +17,7 @@ var touched_idxs: Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	(collision_shape.shape as CircleShape2D).radius = hand_radius
 
 func _input(event):
 	if (event.is_action_pressed("mouse_click")):
@@ -23,26 +25,22 @@ func _input(event):
 			var max_idx = calc_highlight_idx()
 			var card = remove_card(max_idx)
 			touched_idxs.erase(max_idx)
+			# TODO: remove this since card will passed to a different script
 			card.queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta) -> void:
-
-	# tool logic
-	if (collision_shape.shape as CircleShape2D).radius != hand_radius:
-		(collision_shape.shape as CircleShape2D).radius = hand_radius
-
 	if (touched_idxs.size() > 0):
 		hand[calc_highlight_idx()].highlight()
 
-func add_card(card: Node2D) -> void:
+func add_card(card: Card) -> void:
 	hand.push_back(card)
 	add_child(card)
 	card.mouse_entered.connect(_handle_card_touched)
 	card.mouse_exited.connect(_handle_card_untouched)
 	reposition_cards()
 
-func remove_card(card_idx: int) -> Node2D:
+func remove_card(card_idx: int) -> Card:
 	var card = hand.pop_at(card_idx)
 	remove_child(card)
 	reposition_cards()
@@ -62,7 +60,7 @@ func get_card_position(angle_deg: float) -> Vector2:
 	var y: float = hand_radius * sin(deg_to_rad(angle_deg))
 	return Vector2(x, y)
 
-func _handle_card_touched(card: Node2D) -> void:
+func _handle_card_touched(card: Card) -> void:
 	var card_idx = hand.find(card)
 
 	# unhighlight all cards
@@ -72,7 +70,7 @@ func _handle_card_touched(card: Node2D) -> void:
 	# add the card to the touched_idxs array
 	touched_idxs.push_back(card_idx)
 
-func _handle_card_untouched(card: Node2D) -> void:
+func _handle_card_untouched(card: Card) -> void:
 	var card_idx = hand.find(card)
 	hand[card_idx].unhighlight()
 	

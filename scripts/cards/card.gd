@@ -18,29 +18,14 @@ signal mouse_exited(card: Card)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_update_graphics()
+	name_lbl.set_text(card_name)
+	mana_lbl.set_text(str(card_mana_cost))
+	description_lbl.set_text(card_description)
+	card_sprite.texture = card_texture
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta) -> void:
-	_update_graphics()
-
-func set_values(_name: String, _mana_cost: int, _description: String) -> void:
-	card_name = _name
-	card_mana_cost = _mana_cost
-	card_description = _description
-
-func _update_graphics() -> void:
-	if (name_lbl.get_text() != card_name):
-		name_lbl.set_text(card_name)
-
-	if (mana_lbl.get_text() != str(card_mana_cost)):
-		mana_lbl.set_text(str(card_mana_cost))
-
-	if (description_lbl.get_text() != card_description):
-		description_lbl.set_text(card_description)
-	
-	if (card_sprite.texture != card_texture):
-		card_sprite.texture = card_texture
+	pass
 
 func highlight() -> void:
 	$BaseCardSprite.modulate = Color(1, 0.5, 0.1, 1)
