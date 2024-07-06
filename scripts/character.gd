@@ -21,36 +21,39 @@ func _ready():
 	set_health(current_health)
 	$ManaBar.max_value = max_mana
 	set_mana(current_mana)
+	set_armour(armour)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
 
-func set_health(_health) -> void:
-	current_health = clampi(_health, 0, max_health)
+func set_health(new_health) -> void:
+	current_health = clampi(new_health, 0, max_health)
 	$HealthBar.value = current_health
 
 func take_damage(damage: int) -> void:
 	if armour > damage:
-		# more armour than damage
+		# more armour than damage so just reduce armour
 		set_armour(armour - damage)
 		damage = 0
 		return
 	
-	# more damage than armour
+	# more damage than armour so set armour to 0 and reduce health
 	damage -= armour
 	set_armour(0)
 	set_health(current_health - damage)
 
-func set_mana(_mana) -> void:
-	current_mana = clampi(_mana, 0, max_mana)
+func set_mana(new_mana) -> void:
+	current_mana = clampi(new_mana, 0, max_mana)
 	$ManaBar.value = current_mana
 
 func spend_mana(mana_cost: int) -> void:
 	set_mana(current_mana - mana_cost)
 
-func set_armour(_armour) -> void:
-	armour = _armour if _armour >= 0 else 0
+func set_armour(new_armour) -> void:
+	if new_armour < 0:
+		new_armour = 0
+	armour = new_armour
 
 	if armour == 0:
 		$ArmourSprite.visible = false
