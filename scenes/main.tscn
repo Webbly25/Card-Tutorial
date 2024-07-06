@@ -79,19 +79,6 @@ texture = ExtResource("2_grunp")
 
 [node name="Deck" parent="." instance=ExtResource("1_vfwxn")]
 
-[node name="Damage1Button" type="Button" parent="."]
-offset_top = 75.0
-offset_right = 123.0
-offset_bottom = 106.0
-text = "damage 1 player"
-
-[node name="Damage3Button" type="Button" parent="."]
-offset_left = 1.0
-offset_top = 120.0
-offset_right = 137.0
-offset_bottom = 151.0
-text = "damage 3 player"
-
 [node name="EndTurn" type="Button" parent="."]
 offset_left = 276.0
 offset_top = 7.0
@@ -100,6 +87,4 @@ offset_bottom = 38.0
 text = "End Turn"
 
 [connection signal="card_activated" from="Deck" to="." method="_on_deck_card_activated"]
-[connection signal="pressed" from="Damage1Button" to="." method="_on_damage_1_button_pressed"]
-[connection signal="pressed" from="Damage3Button" to="." method="_on_damage_3_button_pressed"]
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]

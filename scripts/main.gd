@@ -63,11 +63,5 @@ func _on_deck_card_activated(card: Card) -> void:
 	card.activate(payload)
 	$Deck.remove_card(card)
 
-func _on_damage_1_button_pressed():
-	$GameScreen/Player.take_damage(1)
-
-func _on_damage_3_button_pressed():
-	$GameScreen/Player.take_damage(3)
-
 func _on_end_turn_pressed():
 	game_controller.transition(GameController.GameState.ENEMY_TURN)
