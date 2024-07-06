@@ -51,9 +51,7 @@ func spend_mana(mana_cost: int) -> void:
 	set_mana(current_mana - mana_cost)
 
 func set_armour(new_armour) -> void:
-	if new_armour < 0:
-		new_armour = 0
-	armour = new_armour
+	armour = max(new_armour, 0)
 
 	if armour == 0:
 		$ArmourSprite.visible = false
