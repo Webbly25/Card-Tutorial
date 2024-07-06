@@ -35,6 +35,7 @@ func reset() -> void:
 	for card in hand:
 		card.queue_free()
 	hand.clear()
+	touched_idxs.clear()
 
 func add_card(card: Card) -> void:
 	hand.push_back(card)
