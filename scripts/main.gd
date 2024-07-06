@@ -11,3 +11,9 @@ func _process(_delta: float) -> void:
 func _on_deck_card_activated(card: Card) -> void:
 	var payload = ActionPayload.new($GameScreen/Player, [$GameScreen/Enemy])
 	card.activate(payload)
+
+func _on_damage_1_button_pressed():
+	$GameScreen/Player.take_damage(1)
+
+func _on_damage_3_button_pressed():
+	$GameScreen/Player.take_damage(3)

@@ -8,7 +8,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 
-func activate(_payload: ActionPayload) -> void:
+func activate(payload: ActionPayload) -> void:
 	# spend 1 mana
-	# add 1 defence to the player
-	print("defend")
+	payload.caster.spend_mana(baseCard.card_mana_cost)
+	# add 1 defence
+	payload.caster.add_armour(1)

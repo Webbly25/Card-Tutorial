@@ -1,20 +1,57 @@
-[gd_scene load_steps=2 format=3 uid="uid://dldr1n8cvtwtv"]
+[gd_scene load_steps=7 format=3 uid="uid://dldr1n8cvtwtv"]
 
 [ext_resource type="Script" path="res://scripts/character.gd" id="1_3urg2"]
+[ext_resource type="Texture2D" uid="uid://bbgeckmnorkey" path="res://assets/sprites/player_character.png" id="2_0r23f"]
+[ext_resource type="Texture2D" uid="uid://diko1them5a1u" path="res://assets/sprites/armor_icon.png" id="3_edf55"]
+[ext_resource type="FontFile" uid="uid://3dxeqlsm06pa" path="res://assets/fonts/MemoryPro.ttf" id="4_0b1d0"]
 
-[node name="Player" type="Node2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufnx0"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_quptm"]
+bg_color = Color(0, 1, 1, 1)
+
+[node name="Character" type="Node2D"]
 position = Vector2(-1, 0)
 script = ExtResource("1_3urg2")
+current_mana = 5
+texture = ExtResource("2_0r23f")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(1, 0)
+texture = ExtResource("2_0r23f")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -26.0
-offset_top = -36.0
+offset_top = -37.0
 offset_right = 24.0
-offset_bottom = -31.0
+offset_bottom = -32.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_ufnx0")
 max_value = 10.0
 step = 1.0
 value = 10.0
 show_percentage = false
+
+[node name="ManaBar" type="ProgressBar" parent="."]
+offset_left = -26.0
+offset_top = -31.0
+offset_right = 24.0
+offset_bottom = -26.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_quptm")
+max_value = 5.0
+step = 1.0
+value = 5.0
+show_percentage = false
+
+[node name="ArmourSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-21, -47)
+texture = ExtResource("3_edf55")
+
+[node name="ArmourLabel" type="Label" parent="ArmourSprite"]
+offset_left = 8.0
+offset_top = -8.0
+offset_right = 48.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource("4_0b1d0")
+text = "0"
