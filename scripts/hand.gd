@@ -31,6 +31,11 @@ func _process(_delta) -> void:
 	if (touched_idxs.size() > 0):
 		hand[calc_highlight_idx()].highlight()
 
+func reset() -> void:
+	for card in hand:
+		card.queue_free()
+	hand.clear()
+
 func add_card(card: Card) -> void:
 	hand.push_back(card)
 	add_child(card)

@@ -1,13 +1,68 @@
-[gd_scene load_steps=6 format=3 uid="uid://np1cly8g8i2r"]
+[gd_scene load_steps=9 format=3 uid="uid://np1cly8g8i2r"]
 
 [ext_resource type="PackedScene" uid="uid://dldr1n8cvtwtv" path="res://scenes/character.tscn" id="1_4k8l8"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_86531"]
 [ext_resource type="PackedScene" uid="uid://cd717o3b26mih" path="res://scenes/deck.tscn" id="1_vfwxn"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_0i8do"]
 [ext_resource type="Texture2D" uid="uid://c7wh5dn58dadl" path="res://assets/sprites/enemy_character.png" id="2_grunp"]
+[ext_resource type="FontFile" uid="uid://3dxeqlsm06pa" path="res://assets/fonts/MemoryPro.ttf" id="6_c4gvt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bbequ"]
+font = ExtResource("6_c4gvt")
+font_size = 64
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wiwh2"]
+font = ExtResource("6_c4gvt")
+font_size = 64
+font_color = Color(0, 1, 0, 1)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_86531")
+
+[node name="Overlays" type="CanvasLayer" parent="."]
+
+[node name="GameOverOverlay" type="ColorRect" parent="Overlays"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.207843, 0, 0, 0.490196)
+
+[node name="Label" type="Label" parent="Overlays/GameOverOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_bbequ")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameWinOverlay" type="ColorRect" parent="Overlays"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.611765, 0, 0.490196)
+
+[node name="Label" type="Label" parent="Overlays/GameWinOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "VICTORY"
+label_settings = SubResource("LabelSettings_wiwh2")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="GameController" type="Node2D" parent="."]
 script = ExtResource("2_0i8do")

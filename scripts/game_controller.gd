@@ -12,6 +12,9 @@ enum GameState {
 var current_state: GameState = GameState.PLAYER_TURN
 
 func transition(new_state: GameState) -> void:
+	if (current_state == new_state):
+		return
+
 	# leaving current state
 	match current_state:
 		GameState.PLAYER_TURN:
