@@ -15,6 +15,9 @@ func _ready() -> void:
 func _process(_delta) -> void:
 	pass
 
+func remove_card(card: Card) -> void:
+	hand.remove_card(card)
+
 func _on_button_pressed() -> void:
 	var attack_card = AttackCardScene.instantiate()
 	hand.add_card(attack_card)

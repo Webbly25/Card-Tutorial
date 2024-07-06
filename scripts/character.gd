@@ -34,6 +34,10 @@ func _ready():
 func _process(_delta):
 	pass
 
+func start_turn() -> void:
+	set_mana(max_mana)
+	set_armour(0)
+
 func set_health(new_health) -> void:
 	current_health = clampi(new_health, 0, max_health)
 	$HealthBar.value = current_health

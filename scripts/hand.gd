@@ -22,9 +22,8 @@ func _ready() -> void:
 func _input(event):
 	if (event.is_action_pressed("mouse_click")):
 		if (touched_idxs.size() > 0):
-			var max_idx = calc_highlight_idx()
-			var card = remove_card(max_idx)
-			touched_idxs.erase(max_idx)
+			var card_idx = calc_highlight_idx()
+			var card = hand[card_idx]
 			card_activated.emit(card)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,11 +38,15 @@ func add_card(card: Card) -> void:
 	card.mouse_exited.connect(_handle_card_untouched)
 	reposition_cards()
 
-func remove_card(card_idx: int) -> Card:
-	var card = hand.pop_at(card_idx)
+func remove_card(card: Card) -> void:
+	var card_idx = hand.find(card)
+
+	hand.remove_at(card_idx)
+	touched_idxs.erase(card_idx)
+
 	remove_child(card)
 	reposition_cards()
-	return card
+	card.queue_free()
 
 func reposition_cards() -> void:
 	var card_spread = min(angle_limit / hand.size(), maxmimum_spread_angle)

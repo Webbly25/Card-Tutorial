@@ -9,7 +9,5 @@ func _process(delta: float) -> void:
 	super(delta)
 
 func activate(payload: ActionPayload) -> void:
-	# spend 1 mana
-	payload.caster.spend_mana(baseCard.card_mana_cost)
 	# add 1 defence
 	payload.caster.add_armour(1)

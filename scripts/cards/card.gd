@@ -6,6 +6,10 @@ signal mouse_exited(card: Card)
 
 @onready var baseCard: BaseCard = $BaseCard
 
+var cost: int:
+	get:
+		return baseCard.card_mana_cost
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	baseCard.mouse_entered.connect(_on_card_mouse_entered)
